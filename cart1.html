@@ -164,6 +164,14 @@ label img {
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-body">
+            <!--<a
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+              href="collection2.html"
+            >
+              <span aria-hidden="true"><i class="fa fa-times"></i></span>
+            </a>-->
             <button
               type="button"
               class="close"
@@ -178,12 +186,6 @@ label img {
                 <h3 class="margin-top-0">Shopping Cart</h3>
                 <div class="cart-table-inner">
                   <form action="" method="get" id='wood-order-form'> 
-
-                  <script>
-  // $(document).ready(function () {
-
-  // });
-</script>
                     <!--<div id="myTable"></div>-->
                                                 <div class="column full-width overflow">
                                 <!--<div class="row-1">
@@ -191,9 +193,7 @@ label img {
                                 </div>-->
                                 <div class="row">
 <div class="col-md-6">
- <a href="#" class="pull-left">
-        <img class="image-number" src="" alt="" style="width: 100%;">
-      </a>  
+<a href="#" class="pull-left"><img class="image-number" src="assets/images/collections/2.jpg" alt="" style="width: 100%;"></a>  
 </div>
 
 
@@ -454,26 +454,13 @@ label img {
                     
 
   $(document).ready(function() {
-
-    // Log window location
-    const keyAndValue = window.location.search;
-    const urlParams = new URLSearchParams(keyAndValue);
-    const param1 = urlParams.get('namenoorul');
-    console.log("val", param1);
-
-    // Assuming you want to dynamically set treeName
-    const treeName = param1 || "defaultTree"; // Use a default value if param1 is null
-    $(".image-number").attr("src", `assets/images/collections/${treeName}.jpg`);
-
   
-      //   console.log("noorulhasan",window.location);
-      // const keyAndValue = window.location.search;
-      // console.log("key & value",keyAndValue);
-      // const urlParams = new URLSearchParams(keyAndValue);
-      // const param1 = urlParams.get('namenoorul');
-      // console.log(param1);
-
-
+        console.log("noorulhasan",window.location);
+      const keyAndValue = window.location.search;
+      console.log("key & value",keyAndValue);
+      const urlParams = new URLSearchParams(keyAndValue);
+      const param1 = urlParams.get('namenoorul');
+      console.log(param1);
       // let size = param1.length;
       // console.log(size);
 const objectPrice = [20,30,40]
