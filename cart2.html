@@ -209,7 +209,7 @@ label img {
 
       </div>
       <div class="btn-group full-width dropdown-category margin-bottom-15">
-            <select onclick="document.getElementById('ironbark').value = '0'" class="custom-select btn btn-success dropdown-toggle text-uppercase pixel" id="inputGroupSelect01">
+            <select class="custom-select btn btn-success dropdown-toggle text-uppercase pixel" id="inputGroupSelect01">
                 <option selected value="119">4x6 in</option>
                 <option value="199">6x8 in</option>
                 <option value="349">8x12 in</option>
@@ -491,8 +491,7 @@ const objectPrice = [0,349,40]
   const updatePrice = (input) => {
     const treeName = input.id
     const qty = parseFloat(input.value) || 0
-    // const rate = perCubicMetre[treeName]
-    rate = parseFloat($("#inputGroupSelect01").val()) || 0;
+    const rate = perCubicMetre[treeName]
     // const rate = param1[treeName]
     $(`#${treeName}value`).attr('value', rate * qty)
   }
@@ -504,51 +503,21 @@ const objectPrice = [0,349,40]
       }, 0
     )
   }
-  // const updateTotal = () => {
-  //   const totalInputs = $('.wood-total').get()
-  //   const total = sumInputValues(totalInputs)
-    
-  //   $('#sum').attr('value', total)
-  // }  
   const updateTotal = () => {
-        const ttt = 0;
-    $('#inputGroupSelect01').attr('value', ttt)
+    const totalInputs = $('.wood-total').get()
+    const total = sumInputValues(totalInputs)
+    
+    $('#sum').attr('value', total)
   }  
-  // $('#wood-order-form')
-  //   .on(
-  //     'keyup change', 
-  //     '.wood-qty', 
-  //     (event) => { 
-  //       updatePrice(event.target)
-  //       updateTotal()
-  //     }
-  //   )
-
-  $('#wood-order-form').on(
-    'keyup change',
-    '.wood-qty', // Listen for changes on quantity or dropdown
-    (event) => {
-      updatePrice(event.target);
-      // updateTotal();
-    }
-  );
-
-  $("#inputGroupSelect01").change(function() {
-            alert("if you change the inchs(size) quantity also reset, so change the quantity");
-});
-
-  // $("#wood-order-form").on("change", "#inputGroupSelect01", updatePrice);
-
-
-  // $('#inputGroupSelect01').on(
-  //   'keyup change',
-  //   '#inputGroupSelect01', // Listen for changes on quantity or dropdown
-  //   () => {
-  //     // updatePrice(event.target);
-  //     updateTotal();
-  //   }
-  // );
-
+  $('#wood-order-form')
+    .on(
+      'keyup change', 
+      '.wood-qty', 
+      (event) => { 
+        updatePrice(event.target)
+        updateTotal()
+      }
+    )
 });
       function sendwhatsapp(){
 
@@ -571,20 +540,19 @@ console.log("noorulhasan",window.location);
        var design2 = document.querySelector("#cb2").value;
        var design3 = document.querySelector("#cb3").value;
        var design4 = document.querySelector("#cb4").value;
-       
 
        var url = "https://wa.me/" + phonenumber + "?text="
-       +"Image Number : "+param1+"%0a"
-       +"Product Name : "+param1+"%0a"
-       +"Product Quantity : "+productQty+"%0a"
-       +"Total Amount : "+totalAmount+"%0a"
-       +"design1 : "+design1+"%0a"
-       +"design2 : "+design2+"%0a"
-       +"design3 : "+design3+"%0a"
-       +"design4 : "+design4+"%0a"
-       +"Message : "+message+"%0a"
+       +"*Image Number :* "+param1+"%0a"
+       +"*Product Name :* "+param1+"%0a"
+       +"*Product Quantity :* "+productQty+"%0a"
+       +"*Total Amount :* "+totalAmount+"%0a"
+       +"*design1 :* "+design1+"%0a"
+       +"*design2 :* "+design2+"%0a"
+       +"*design3 :* "+design3+"%0a"
+       +"*design4 :* "+design4+"%0a"
+       +"*Message :* "+message+"%0a"
       //  +"*country :* "+country+"%0a"
-       +"pixel : "+pixel
+       +"*pixel :* "+pixel
        +"%0a%0a"
        +"This is an example of send HTML form data to WhatsApp";
        window.open(url, '_blank').focus();
