@@ -164,20 +164,12 @@ label img {
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-body">
-            <!--<a
-              class="close"
-              data-dismiss="modal"
-              aria-label="Close"
-              href="collection2.html"
-            >
-              <span aria-hidden="true"><i class="fa fa-times"></i></span>
-            </a>-->
             <button
               type="button"
               class="close"
               data-dismiss="modal"
               aria-label="Close"
-              onclick="location.href='collection.html'"
+              onclick="location.href='collection_stand.html'"
             >
               <span aria-hidden="true"><i class="fa fa-times"></i></span>
             </button>
@@ -186,6 +178,12 @@ label img {
                 <h3 class="margin-top-0">Shopping Cart</h3>
                 <div class="cart-table-inner">
                   <form action="" method="get" id='wood-order-form'> 
+
+                  <script>
+  // $(document).ready(function () {
+
+  // });
+</script>
                     <!--<div id="myTable"></div>-->
                                                 <div class="column full-width overflow">
                                 <!--<div class="row-1">
@@ -193,7 +191,9 @@ label img {
                                 </div>-->
                                 <div class="row">
 <div class="col-md-6">
-<a href="#" class="pull-left"><img class="image-number" src="assets/images/collections/2.jpg" alt="" style="width: 100%;"></a>  
+ <a href="#" class="pull-left">
+        <img class="image-number" src="" alt="" style="width: 100%;">
+      </a>  
 </div>
 
 
@@ -209,10 +209,12 @@ label img {
 
       </div>
       <div class="btn-group full-width dropdown-category margin-bottom-15">
-            <select class="custom-select btn btn-success dropdown-toggle text-uppercase pixel" id="inputGroupSelect01">
-                <option selected value="1024 x 1024 px">1024 x 1024 px</option>
-                <option value="1920 x 1080 px">1920 x 1080 px</option>
-                <option value="1080 x 1920 px">1080 x 1920 px</option>
+            <select onclick="document.getElementById('ironbark').value = '0'" class="custom-select btn btn-success dropdown-toggle text-uppercase pixel" id="inputGroupSelect01">
+                <option selected value="119">4x6 in</option>
+                <option value="199">6x8 in</option>
+                <option value="349">8x12 in</option>
+                <option value="499">10x15 in</option>
+                <option value="699">12x18 in</option>
             </select>
         </div>
       </div>
@@ -342,7 +344,7 @@ label img {
 
 
 
-                                    <a href="#" class="cart-menu-line-title">Butterfly eyes women</a>
+                                    <a href="product.html" class="cart-menu-line-title">Butterfly eyes women</a>
 
       <div class="mb-3 menier">
         <input type="number" id="ironbark" class="form-control margin-bottom-10 wood-qty" placeholder="Enter Your QTY">
@@ -454,16 +456,29 @@ label img {
                     
 
   $(document).ready(function() {
+
+    // Log window location
+    const keyAndValue = window.location.search;
+    const urlParams = new URLSearchParams(keyAndValue);
+    const param1 = urlParams.get('namenoorul');
+    console.log("val", param1);
+
+    // Assuming you want to dynamically set treeName
+    const treeName = param1 || "defaultTree"; // Use a default value if param1 is null
+    $(".image-number").attr("src", `assets/images/collections_stand/${treeName}.jpg`);
+
   
-        console.log("noorulhasan",window.location);
-      const keyAndValue = window.location.search;
-      console.log("key & value",keyAndValue);
-      const urlParams = new URLSearchParams(keyAndValue);
-      const param1 = urlParams.get('namenoorul');
-      console.log(param1);
+      //   console.log("noorulhasan",window.location);
+      // const keyAndValue = window.location.search;
+      // console.log("key & value",keyAndValue);
+      // const urlParams = new URLSearchParams(keyAndValue);
+      // const param1 = urlParams.get('namenoorul');
+      // console.log(param1);
+
+
       // let size = param1.length;
       // console.log(size);
-const objectPrice = [20,30,40]
+const objectPrice = [0,349,40]
   const stackingFee = 25
   //  var name = document.querySelector(".wood-qty").value;
   // const pry = {
@@ -476,7 +491,8 @@ const objectPrice = [20,30,40]
   const updatePrice = (input) => {
     const treeName = input.id
     const qty = parseFloat(input.value) || 0
-    const rate = perCubicMetre[treeName]
+    // const rate = perCubicMetre[treeName]
+    rate = parseFloat($("#inputGroupSelect01").val()) || 0;
     // const rate = param1[treeName]
     $(`#${treeName}value`).attr('value', rate * qty)
   }
@@ -488,21 +504,51 @@ const objectPrice = [20,30,40]
       }, 0
     )
   }
-  const updateTotal = () => {
-    const totalInputs = $('.wood-total').get()
-    const total = sumInputValues(totalInputs)
+  // const updateTotal = () => {
+  //   const totalInputs = $('.wood-total').get()
+  //   const total = sumInputValues(totalInputs)
     
-    $('#sum').attr('value', total)
+  //   $('#sum').attr('value', total)
+  // }  
+  const updateTotal = () => {
+        const ttt = 0;
+    $('#inputGroupSelect01').attr('value', ttt)
   }  
-  $('#wood-order-form')
-    .on(
-      'keyup change', 
-      '.wood-qty', 
-      (event) => { 
-        updatePrice(event.target)
-        updateTotal()
-      }
-    )
+  // $('#wood-order-form')
+  //   .on(
+  //     'keyup change', 
+  //     '.wood-qty', 
+  //     (event) => { 
+  //       updatePrice(event.target)
+  //       updateTotal()
+  //     }
+  //   )
+
+  $('#wood-order-form').on(
+    'keyup change',
+    '.wood-qty', // Listen for changes on quantity or dropdown
+    (event) => {
+      updatePrice(event.target);
+      // updateTotal();
+    }
+  );
+
+  $("#inputGroupSelect01").change(function() {
+            alert("if you change the inchs(size) quantity also reset, so change the quantity");
+});
+
+  // $("#wood-order-form").on("change", "#inputGroupSelect01", updatePrice);
+
+
+  // $('#inputGroupSelect01').on(
+  //   'keyup change',
+  //   '#inputGroupSelect01', // Listen for changes on quantity or dropdown
+  //   () => {
+  //     // updatePrice(event.target);
+  //     updateTotal();
+  //   }
+  // );
+
 });
       function sendwhatsapp(){
 
@@ -525,19 +571,20 @@ console.log("noorulhasan",window.location);
        var design2 = document.querySelector("#cb2").value;
        var design3 = document.querySelector("#cb3").value;
        var design4 = document.querySelector("#cb4").value;
+       
 
        var url = "https://wa.me/" + phonenumber + "?text="
-       +"*Image Number :* "+param1+"%0a"
-       +"*Product Name :* "+param1+"%0a"
-       +"*Product Quantity :* "+productQty+"%0a"
-       +"*Total Amount :* "+totalAmount+"%0a"
-       +"*design1 :* "+design1+"%0a"
-       +"*design2 :* "+design2+"%0a"
-       +"*design3 :* "+design3+"%0a"
-       +"*design4 :* "+design4+"%0a"
-       +"*Message :* "+message+"%0a"
+       +"Image Number : "+param1+"%0a"
+       +"Product Name : "+param1+"%0a"
+       +"Product Quantity : "+productQty+"%0a"
+       +"Total Amount : "+totalAmount+"%0a"
+       +"design1 : "+design1+"%0a"
+       +"design2 : "+design2+"%0a"
+       +"design3 : "+design3+"%0a"
+       +"design4 : "+design4+"%0a"
+       +"Message : "+message+"%0a"
       //  +"*country :* "+country+"%0a"
-       +"*pixel :* "+pixel
+       +"pixel : "+pixel
        +"%0a%0a"
        +"This is an example of send HTML form data to WhatsApp";
        window.open(url, '_blank').focus();
